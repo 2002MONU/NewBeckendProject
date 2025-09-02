@@ -1,0 +1,4 @@
+{
+    "merge-conflict.autoNavigateNextConflict.enabled": false,
+    "github.copilot.nextEditSuggestions.enabled": true
+}

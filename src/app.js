@@ -1,6 +1,6 @@
 import express from 'express';;
 import cors from 'cors';
-
+// import cookieParser from 'cookie-parser';
 const app = express();
  
 app.use(cors({
@@ -24,6 +24,20 @@ app.use(express.static('public'));
 // import routes
 import healthCheckController from './routes/healthCheck.routes.js'; 
 
+import userRoutes from './routes/user.routes.js';
+ 
+// var cookieParser = require('cookie-parser')
+
+// app.use(cookieParser());
 app.use('/api/v1/health', healthCheckController);
+app.use('/api/v1/users', userRoutes);
+
+app.use((err, req, res, next) => {
+    res.status(err.status || 500).json({
+        status: err.status || 500,
+        message: err.message || 'Internal Server Error',
+        stack: process.env.NODE_ENV === 'production' ? undefined : err.stack
+    });
+});
 
 export { app };
